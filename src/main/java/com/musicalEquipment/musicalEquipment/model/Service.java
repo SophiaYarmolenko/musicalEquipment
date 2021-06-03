@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 @Data
 @Table(name = "service")
 public class Service {
@@ -23,7 +24,7 @@ public class Service {
     private String description;
 
     @ManyToOne
-    private ServiceSubtype serviceSubtype;
+    private ServiceType serviceType;
 
     @OneToMany(mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Document> documents = new ArrayList<>();

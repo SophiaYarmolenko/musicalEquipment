@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<header
+        th:insert="header :: header">
+</header>
+
+<div class="container mt-5 mb-5">
+    <h1> Додати товар/послугу </h1>
+    <form th:action="${addService}" method="post" enctype="multipart/form-data">
+        <input type="text" name="name" placeholder="Назва товару/послуги" class="form-control"><br>
+        <input type="number" name="cost" placeholder="Вартість товару/послуги" class="form-control"><br>
+        <select name="serviceTypeName" class="form-control">
+            <option disabled selected hidden>Виберіть тип товару/послуги</option>
+            <option th:each="serviceType : ${serviceTypes}" th:value="${serviceType.name}" th:text="${serviceType.name}">
+            </option>
+        </select><br>
+        <textarea name="description" placeholder="Опис товару/послуги" class="form-control"></textarea><br>
+        <div class="form-group">
+            <label>Додати фотографії:</label>
+            <input type="file" accept=".jpg,.png,.jpeg" class="form-control-file" name="multipartFile" aria-describedby="fileHelp">
+        </div>
+        <button type="submit" class="btn btn-success">Готово!</button>
+    </form>
+</div>
+</body>
+</html>

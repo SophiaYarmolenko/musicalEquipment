@@ -9,7 +9,6 @@ public class AdminPageController {
 
     @GetMapping("/adminPage")
     public String getAdminPage(Model model) {
-        model.addAttribute("title", "SmartCourse");
         return "adminPage";
     }
 }

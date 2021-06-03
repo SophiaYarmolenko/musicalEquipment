@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 @Data
 @Table(name = "service_type")
 public class ServiceType {
@@ -19,15 +20,15 @@ public class ServiceType {
     private String name;
 
     @OneToMany(mappedBy = "serviceType", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ServiceSubtype> serviceSubtypes = new ArrayList<>();
+    private List<Service> services = new ArrayList<>();
 
-    public void addServiceSubtype(ServiceSubtype serviceSubtype) {
-        serviceSubtypes.add(serviceSubtype);
-        serviceSubtype.setServiceType(this);
+    public void addService(Service service) {
+        services.add(service);
+        service.setServiceType(this);
     }
 
-    public void removeServiceSubType(ServiceSubtype serviceSubtype) {
-        serviceSubtypes.remove(serviceSubtype);
-        serviceSubtype.setServiceType(null);
+    public void removeService(Service service) {
+        services.remove(service);
+        service.setServiceType(null);
     }
 }
