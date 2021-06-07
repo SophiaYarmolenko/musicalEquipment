@@ -16,6 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 
 @Controller
@@ -46,7 +48,6 @@ public class ServiceCUDController {
                              @RequestParam MultipartFile multipartFile,
                              Model model) throws IOException {
         ServiceType serviceType = serviceTypeRepository.findByName(serviceTypeName);
-        System.out.println(serviceType);
         Service service = new Service();
         service.setName(name);
         service.setServiceType(serviceType);
@@ -61,7 +62,7 @@ public class ServiceCUDController {
         serviceRepository.save(service);
         documentRepository.saveAll(uploadedDocuments);
 
-        return "redirect:/adminPage";
+        return "adminPage";
     }
 
     private void uploadFile(MultipartFile multipartFile, Service service, List<Document> uploadedDocuments) {
@@ -73,7 +74,7 @@ public class ServiceCUDController {
         document.setName(fileName);
 
         try {
-            document.setContent(multipartFile.getBytes());
+            document.setContent("data:image/png;base64,"+ Arrays.toString(Base64.getEncoder().encode(multipartFile.getBytes())));
         } catch (IOException e) {
         }
         documentRepository.save(document);

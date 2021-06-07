@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<header
+        th:insert="header :: header">
+</header>
+
+
+<main role="main">
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div th:each="service : ${services}" class="card mb-4 shadow-sm">
+                    <img src="data:image/png;base64," th:text="${service.document.content}">
+                    <div class="card-body">
+                        <!--/*@thymesVar id="articleName3" type=""*/-->
+                        <p class="card-text" th:text="${service.name}"/>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a class="btn btn-outline-secondary" href="/">View</a>
+                            </div>
+                            <small class="text-muted">9 mins</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</main>
+<div
+        th:insert="footer :: footer">
+</div>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package com.musicalEquipment.musicalEquipment.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "service")
+@AllArgsConstructor
 public class Service {
     @Id
     @GeneratedValue
@@ -23,8 +25,17 @@ public class Service {
     @Column(name = "description")
     private String description;
 
+    @JsonIgnore
     @ManyToOne
     private ServiceType serviceType;
+
+    public Service() {
+
+    }
+
+    public List<Document> getDocuments() {
+        return documents;
+    }
 
     @OneToMany(mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Document> documents = new ArrayList<>();
